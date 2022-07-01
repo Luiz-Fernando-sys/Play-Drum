@@ -6,6 +6,15 @@ document.body.addEventListener('keydown', (event) => {
     playSound(event.code.toLocaleLowerCase()); //O "toLowerCase" foi somente para transformar o resultado das teclas que clicamos, em minúsculo, para que possamos chamar o som respectivo conforme nomeamos dentro da pasta sound.
 });
 
+document.querySelector('.composer button').addEventListener('click', () => { //Adicionando monitoramento de evento de clique no meu botão de composer
+    let song = document.querySelector('#input').value; //Função responsável por guardar a sequência de batidas que o usuário escrever no campo
+
+    if(song !== ''){ //Se o usuário tiver digitado algo
+        let songArray = song.split(''); //A variável songArray irá pegar toda a sequência de letras digitada pelo usuário e dividir cada letra em um ítem de um array e guardar dentro dela.
+        playComposition(songArray) //Chamamos a função responsável por tocar a música digitada pelo usuário, e passamos para dentro dela como parâmetro a variável songArray que guarda todos os itens do array dentro dela conforme o usuário digitou no campo de composição.
+    }
+});
+
 //Função para tocar som
 function playSound(sound) {
     let audioElement = document.querySelector(`#s_${sound}`); //variável responsável por pegar o arquivo de áudio correto dentro da pasta sounds, referente exatamente à tecla que o usuário clicou no teclado
@@ -28,3 +37,16 @@ function playSound(sound) {
     }
 }
 
+//Função responsável por executar a composição que a pessoa digitou no campo de coomposição, e esperar um tempo de execução da próxima tecla
+function playComposition(songArray){
+    let wait = 0;
+    //Para cada item do array, toque o som referente à ele e espere um tempo de 0 + 250 milisegundos e depois toque o próximo som conforme o usuário digitou.
+    //Note que o espaço também é considerado um som. E o sistema irá esperar 250 millisegundos de tempo quando tiver espaço. Assim, poderemos perceber um tempo.
+    //Se caso o usuário digitar uma letra que não esteja predeterminada com som, ele não irá executar nenhum som, mas mesmo assim irá esperra o tempo destinado ao toque de uma tecla
+    for(let songItem of songArray){
+        setTimeout(() => {
+            playSound(`key${songItem}`);
+        }, wait);
+        wait += 250;
+    }
+}

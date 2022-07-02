@@ -1,3 +1,5 @@
+// ----------------------------------------------  PARTE RESPONSÁVEL POR TOCAR O SOM DAS TECLAS ----------------------------------------------------------------------------
+
 //Função responsável por adicionar um evento de observação no corpo do site inteiro para detectar qual tecla o usuário digitou.
 //Basicamente este comando irá ficar monitorando qual tecla o usuário clicou e irá executar alguma coisa que pedirmos dentro dele, uma vez que estamos criando uma arrow function dentro dele
 //O som será executado assim que o usuário apertar a tecla. Isso porque utilizamos o 'keydown'
@@ -6,6 +8,9 @@ document.body.addEventListener('keydown', (event) => {
     executeSound(event.code.toLocaleLowerCase()); //O "toLowerCase" foi somente para transformar o resultado das teclas que clicamos, em minúsculo, para que possamos chamar o som respectivo conforme nomeamos dentro da pasta sound.
 });
 
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// ----------------------------------------------  PARTE RELACIONADA À COMPOSIÇÃO CRIADA PELO USUÁRIO: ----------------------------------------------------------------------------
 document.querySelector('.composition button').addEventListener('click', () => { //Adicionando monitoramento de evento de clique no meu botão da class "composition"
     let musical_sequence = document.querySelector('#input').value; //Função responsável por guardar a sequência de batidas que o usuário escrever no campo
 
@@ -14,6 +19,9 @@ document.querySelector('.composition button').addEventListener('click', () => { 
         executeComposition(musical_array) //Chamamos a função responsável por tocar a música digitada pelo usuário, e passamos para dentro dela como parâmetro a variável musical_array que guarda todos os itens do array dentro dela conforme o usuário digitou no campo de composição.
     }
 });
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// ----------------------------------------------  PARTE RESPONSÁVEL POR TOCAR O SOM DAS TECLAS ----------------------------------------------------------------------------
 
 //Função para tocar som
 function executeSound(sound) {
@@ -36,6 +44,9 @@ function executeSound(sound) {
         }, 300);
     }
 }
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// ----------------------------------------------  PARTE RELACIONADA À COMPOSIÇÃO CRIADA PELO USUÁRIO: ----------------------------------------------------------------------------
 
 //Função responsável por executar a composição que a pessoa digitou no campo de coomposição, e esperar um tempo de execução da próxima tecla
 function executeComposition(musical_array){
@@ -50,3 +61,4 @@ function executeComposition(musical_array){
         wait += 250;
     }
 }
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
